@@ -6,7 +6,6 @@ export const songsArr = [
     album: 'From The Wells',
     year: 2013,
     src: '/songs/track1.mp3',
-    duration: 180,
   },
   {
     id: '02',
@@ -15,7 +14,6 @@ export const songsArr = [
     album: 'From The Wells',
     year: 2013,
     src: '/songs/track2.mp3',
-    duration: 240,
   },
   {
     id: '03',
@@ -24,7 +22,6 @@ export const songsArr = [
     album: 'From The Wells',
     year: 2013,
     src: '/songs/track3.mp3',
-    duration: 150,
   },
   {
     id: '04',
@@ -33,7 +30,6 @@ export const songsArr = [
     album: 'From The Wells',
     year: 2013,
     src: '/songs/track4.mp3',
-    duration: 300,
   },
   {
     id: '05',
@@ -42,7 +38,6 @@ export const songsArr = [
     album: 'From The Wells',
     year: 2013,
     src: '/songs/track5.mp3',
-    duration: 346,
   },
   {
     id: '06',
@@ -51,6 +46,5 @@ export const songsArr = [
     album: 'From The Wells',
     year: 2013,
     src: '/songs/track6.mp3',
-    duration: 267,
   },
 ];
