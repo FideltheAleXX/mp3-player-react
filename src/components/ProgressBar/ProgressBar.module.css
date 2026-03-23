@@ -1,7 +1,79 @@
-.progress-container {
-  width: 100%;
+.progressBar {
+  display: flex;
+  width: calc(100% - 1rem);
+  margin: 8px;
+  padding: 8px;
 }
 
 input {
   width: 100%;
+  background-color: #f5f5f5;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  /* -webkit-appearance: none; */
 }
+
+input::-moz-range-track {
+  height: 6px;
+  background: #e5e5e5;
+  border-radius: 3px;
+}
+
+input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #d4d4d4;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input::-moz-range-progress {
+  background: #a3a3a3;
+  height: 6px;
+  border-radius: 3px;
+}
+
+/* input::-webkit-slider-runnable-track {
+  height: 6px;
+  background: #e5e5e5;
+  border-radius: 3px;}
+
+  input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -5px;  выравнивание по треку
+} 
+
+input[type="range"] {
+    -webkit-appearance: none;
+
+  background: linear-gradient(
+    to right,
+    #4caf50 0%,
+    #4caf50 var(--value),
+    #ddd var(--value),
+    #ddd 100%
+  );
+}
+export default function Range() {
+  const [value, setValue] = useState(50);
+
+  const percent = (value - 0) / (100 - 0) * 100;
+
+  return (
+    <input
+      type="range"
+      min="0"
+      max="100"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      style={{ "--value": `${percent}%` }}
+    />
+  );
+}
+
+
+*/

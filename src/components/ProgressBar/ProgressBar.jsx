@@ -2,7 +2,7 @@ import styles from './ProgressBar.module.css';
 
 const ProgressBar = ({ current, total, onChange }) => {
   return (
-    <div className="progress-container">
+    <div className={styles.progressBar}>
       <input
         type="range"
         min="0"

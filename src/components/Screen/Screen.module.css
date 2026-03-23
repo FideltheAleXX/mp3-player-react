@@ -1,3 +1,7 @@
+.screen {
+  margin: 4px;
+}
+
 .track {
   display: flex;
   padding: 16px;

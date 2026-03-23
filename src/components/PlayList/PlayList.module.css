@@ -1,3 +1,9 @@
 .playlist {
   margin: 8px;
+  padding: 8px;
+}
+
+.active {
+  font-weight: 600;
+  background-color: #fafafa;
 }

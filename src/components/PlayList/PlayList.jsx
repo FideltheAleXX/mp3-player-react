@@ -9,7 +9,7 @@ const PlayList = ({ songs, currentTrackIndex, onTrackSelect }) => {
           className={index === currentTrackIndex ? styles.active : ''}
           onClick={() => onTrackSelect(index)}
         >
-          <span>{song.artist}</span> — {song.title}
+          <span>{song.artist}</span> - {song.title}
         </li>
       ))}
     </ul>

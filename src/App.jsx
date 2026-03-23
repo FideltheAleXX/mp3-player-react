@@ -4,8 +4,9 @@ import Controls from './components/Controls/Controls';
 import PlayList from './components/PlayList/PlayList';
 import ProgressBar from './components/ProgressBar/ProgressBar';
 import Screen from './components/Screen/Screen';
+import Volume from './components/Volume/Volume';
+import MuteButton from './components/MuteButton/MuteButton';
 import { songsArr } from '../public/data/songs';
-import { ImVolumeMute, ImVolumeMute2 } from 'react-icons/im';
 
 function App() {
   const audioRef = useRef(null);
@@ -55,17 +56,7 @@ function App() {
     setCurrentTime(value);
   };
 
-  const formatTime = (time) => {
-    if (!time) return '0:00';
-
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  };
-
-  const handleVolumeChange = (e) => {
-    const value = e.target.value;
+  const handleVolumeChange = (value) => {
     setVolume(value);
     audioRef.current.volume = value;
   };
@@ -100,7 +91,6 @@ function App() {
 
   return (
     <div className="container">
-      {/* <Screen /> */}
       <div className="player">
         <audio
           preload="metadata"
@@ -111,20 +101,10 @@ function App() {
           onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
         />
       </div>
-      <div>
-        {formatTime(currentTime)} / {formatTime(duration)}
-      </div>
-      <input
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        value={volume}
-        onChange={handleVolumeChange}
-      />
-      <button onClick={toggleMute}>
-        {isMuted ? <ImVolumeMute2 /> : <ImVolumeMute />}
-      </button>
+      <Screen currentTime={currentTime} duration={duration} />
+      <Volume volume={volume} onChange={handleVolumeChange} />
+      <MuteButton isMuted={isMuted} onToggle={toggleMute} />
+
       <ProgressBar
         current={currentTime}
         total={duration}
@@ -138,6 +118,7 @@ function App() {
         onPrev={handlePrev}
         onStop={handleStop}
       />
+
       <PlayList
         songs={songs}
         currentTrackIndex={currentTrackIndex}
