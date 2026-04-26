@@ -10,6 +10,9 @@ import { songsArr } from '../public/data/songs';
 
 function App() {
   const audioRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const analyserRef = useRef(null);
+  const [analyserData, setAnalyserData] = useState(null);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [songs, setSongs] = useState(songsArr);
@@ -21,9 +24,30 @@ function App() {
 
   const togglePlay = () => {
     const audio = audioRef.current;
+
+    if (!audioContextRef.current) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      const context = new AudioContext();
+      const analyser = context.createAnalyser();
+
+      const source = context.createMediaElementSource(audio);
+
+      source.connect(analyser);
+      analyser.connect(context.destination);
+
+      analyser.fftSize = 256;
+
+      audioContextRef.current = context;
+      analyserRef.current = analyser;
+      setAnalyserData(analyser);
+    }
+
     if (isPlaying) {
       audio.pause();
     } else {
+      if (audioContextRef.current.state === 'suspended') {
+        audioContextRef.current.resume();
+      }
       audio.play();
     }
     setIsPlaying(!isPlaying);
@@ -45,6 +69,12 @@ function App() {
   };
 
   const currentTrack = songs[currentTrackIndex];
+
+  const coverArt = songs[currentTrackIndex].cover;
+
+  const trackName = songs[currentTrackIndex].title;
+
+  const artistName = songs[currentTrackIndex].artist;
 
   const onTrackSelect = (index) => {
     setCurrentTrackIndex(index);
@@ -101,7 +131,14 @@ function App() {
           onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
         />
       </div>
-      <Screen currentTime={currentTime} duration={duration} />
+      <Screen
+        currentTime={currentTime}
+        duration={duration}
+        coverArt={coverArt}
+        trackName={trackName}
+        artistName={artistName}
+        analyser={analyserData}
+      />
       <Volume volume={volume} onChange={handleVolumeChange} />
       <MuteButton isMuted={isMuted} onToggle={toggleMute} />
 

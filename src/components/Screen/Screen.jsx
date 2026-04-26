@@ -1,6 +1,14 @@
+import Equalizer from '../Equalizer/Equalizer';
 import styles from './Screen.module.css';
 
-const Screen = ({ currentTime, duration }) => {
+const Screen = ({
+  currentTime,
+  duration,
+  coverArt,
+  trackName,
+  artistName,
+  analyser,
+}) => {
   const formatTime = (time) => {
     if (!time) return '0:00';
 
@@ -12,15 +20,16 @@ const Screen = ({ currentTime, duration }) => {
 
   return (
     <div className={styles.screen}>
+      <img src={coverArt} alt="cover" className={styles.cover} />
       <div>
         {formatTime(currentTime)} / {formatTime(duration)}
       </div>
-      <div className={styles.track}>Tracks name</div>
-
-      {/* <h3>
-        {currentTrack.title} — {currentTrack.artist}
-      </h3> */}
-      <div> Equalizer</div>
+      <div className={styles.track}>
+        {artistName} - {trackName}
+      </div>
+      <div>
+        <Equalizer analyser={analyser} />
+      </div>
     </div>
   );
 };
